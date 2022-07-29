@@ -1,14 +1,18 @@
-.page-container{
+
+.title-container{
+  background-color: #d9c5b2;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
   align-items: center;
-}
-
-.App {
   text-align: center;
+  color: #34312d;
 }
 
+.header-container{
+  width: 50%;
+}
 
 
 .color-box{
@@ -20,6 +24,7 @@
 
 
 .inputs-container{
+ 
   text-align: center;
   margin: 35px;
   display: flex;
@@ -27,7 +32,8 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: center;
-  }
+
+}
 
 .break {
   flex-basis: 100%;
