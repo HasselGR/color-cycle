@@ -3,6 +3,7 @@ import { Input } from './components/input.component';
 import './App.css';
 
 function App() {
+  const dictionary = ['a','b','c','e','d', 'f','A','B','C','D','F','0','1','2','3','4','5','6','7','8','9', 'Backspace'];
 
   const [colors, setColors] =useState({
     red:'',
@@ -15,35 +16,30 @@ function App() {
   const [color, setColor] = useState('')
   const [time, setTime] =useState('');
   const [intervalID, setIntervalID]=useState(0);
-  const [palette, setPalette] = useState([ ]);
+  const [palette, setPalette] = useState([]);
 
   useEffect(() => {
     setColor(`#${colors.red}${colors.green}${colors.blue}`)
   }, [colors]) 
   
-
-  const handleKeydown = (event) => {
-    if (event.key === ' '){
-      console.log(color)
+  
+  
+  const validCharacter = (value) => {
+    if (!value.length){
+      return true;
+    } else{
+      return !!dictionary.includes(value.at(-1))
     }
   }
 
-  useEffect(() =>{
-    document.addEventListener('keydown',handleKeydown, true);
-  },[handleKeydown])
-
-
-
-
 
   const handleChange = (event) => {
-    const regex = /^[0-9a-fA-F\b]+$/;
-    if(regex.test(event.target.value) && colors[event.target.name].length < 2){
-      setColors(oldColors => ({
-        ...oldColors,
-        [event.target.name]: event.target.value,
-      }))
-    }else{
+    if(validCharacter(event.target.value)){
+        setColors(oldColors => ({
+          ...oldColors,
+          [event.target.name]: event.target.value,
+        }))
+    }else if (event.target.value.length){
       alert('Invalid Character or Length, We are only able to accept hexadecimal symbols')
       return;
     }
@@ -74,26 +70,30 @@ function App() {
     setIntervalID(newInterval);
   }
   
+  const addToPalette = (event) => {
+    event.preventDefault();
+    setPalette(current => [...current, color])
+    console.log(palette)
+  }
  
 
   const handleNumberChange= (event) =>{
     setTime(event.target.value)
   }
 
-
   return (
-    <div class="page-container">
+    <div className="page-container">
       <div className="title-container">
         <div className='header-container'>
           <h1>color-cycle</h1>
           <h2>This app draws a box filled with a user specified color and makes small changes over time also based on user input. In other words, from cycles through changes to the originally specified color. These changes allow the user to experience the visual impact different changes to the individual parts of an RGB color specification (e.g. #000000 color code).</h2>
         </div>
-        <div style={{backgroundColor: color}} className='color-box'>
-
-
+        <div className='box-container'>
+        <div style={{backgroundColor: color}} className='color-box'/>
+        <button className='button-56' onClick={addToPalette}>Add current color to palette</button>
         </div>
       </div>
-      <div>
+      <div className='inputs-and-palette-container'>
         <form className="inputs-container">
             <h1>Input for colors:</h1>  
           <div className='break'/>
@@ -110,8 +110,32 @@ function App() {
             <h1>Change Interval:</h1>
           <div className='break'/>
             <Input active={intervalID} color="interval" state={time} change={handleNumberChange}/>
-            <button className='button' onClick={handleStart}>{intervalID===0? 'Start':'Pause' }</button>
+            <button className='button-56' onClick={handleStart}>{intervalID===0? 'Start':'Pause' }</button>
+            
         </form>
+        <div className='palette-container'>
+          <h1>Color Palette: </h1>
+          <div className='palette-elements-container'>
+            { palette.length === 0 ?
+            
+            <h2>Your palette will be shown here when you add an element</h2>
+              :
+              palette.map((element, index) => {
+                return (
+                  <div key={index} className='palette-element' 
+                  onClick={() =>{
+                    navigator.clipboard.writeText(`${element};`);
+                  }}>
+                    <div 
+                      style={{backgroundColor: element, width: '45px', height:'45px', marginTop:'15px'}}
+                      />
+                    <h2>{element}</h2>
+                  </div>
+                );
+              })
+            }
+          </div>
+        </div>
       </div>
     </div>
   );
