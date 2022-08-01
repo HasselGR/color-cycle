@@ -17,6 +17,7 @@ function App() {
   const [time, setTime] =useState('');
   const [intervalID, setIntervalID]=useState(0);
   const [palette, setPalette] = useState([]);
+  const [pattern, setPattern] = useState('increment');
 
   useEffect(() => {
     setColor(`#${colors.red}${colors.green}${colors.blue}`)
@@ -46,7 +47,9 @@ function App() {
   }
 
 
-
+  const patternChange = (event) =>{
+    setPattern(event.target.value);
+  }
 
 
   const handleStart = (event) =>{
@@ -59,12 +62,22 @@ function App() {
     }
 
     const newInterval = setInterval(() => {
+      if(pattern === 'increment'){
         setColors(oldColors => ({
           ...oldColors,
             red: (parseInt(oldColors.red, 16) + parseInt(oldColors.incrementRed, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.red, 16) + parseInt(oldColors.incrementRed, 16)).toString(16),
             blue: (parseInt(oldColors.blue, 16) + parseInt(oldColors.incrementBlue, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.blue, 16) + parseInt(oldColors.incrementBlue, 16)).toString(16),
             green: (parseInt(oldColors.green, 16) + parseInt(oldColors.incrementGreen, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.green, 16) + parseInt(oldColors.incrementGreen, 16)).toString(16),
         }))
+      }
+      if(pattern === 'decrement'){
+        setColors(oldColors => ({
+          ...oldColors,
+            red: (parseInt(oldColors.red, 16) - parseInt(oldColors.incrementRed, 16)) < parseInt('00', 16)? '00': (parseInt(oldColors.red, 16) - parseInt(oldColors.incrementRed, 16)).toString(16),
+            blue: (parseInt(oldColors.blue, 16) - parseInt(oldColors.incrementBlue, 16)) < parseInt('00', 16)? '00': (parseInt(oldColors.blue, 16) - parseInt(oldColors.incrementBlue, 16)).toString(16),
+            green: (parseInt(oldColors.green, 16) - parseInt(oldColors.incrementGreen, 16)) < parseInt('00', 16)? '00': (parseInt(oldColors.green, 16) - parseInt(oldColors.incrementGreen, 16)).toString(16),
+        }))
+      }
         
       }, time=== '' ? '250': time)
     setIntervalID(newInterval);
@@ -81,6 +94,7 @@ function App() {
     setTime(event.target.value)
   }
 
+
   return (
     <div className="page-container">
       <div className="title-container">
@@ -95,6 +109,24 @@ function App() {
       </div>
       <div className='inputs-and-palette-container'>
         <form className="inputs-container">
+          <input
+            type="radio"
+            name="pattern"
+            value="increment"
+            id="increment"
+            checked={pattern === 'increment'}
+            onChange={patternChange}
+          />
+          <label>Increment</label>
+          <input
+            type="radio"
+            name="pattern"
+            value="decrement"
+            id="decrement"
+            onChange={patternChange}
+          />
+          <label>Decrement</label>
+          <div className='break'/>
             <h1>Input for colors:</h1>  
           <div className='break'/>
             <Input active={intervalID} color="red" state={colors.red} change={handleChange}/>
@@ -130,6 +162,17 @@ function App() {
                       style={{backgroundColor: element, width: '45px', height:'45px', marginTop:'15px'}}
                       />
                     <h2>{element}</h2>
+                  <button className='button-56' onClick={
+                    () => {
+                      setColor(element)
+                      setColors(oldColors => ({
+                        ...oldColors,
+                          red: element.slice(1, 3) ,
+                          green: element.slice(3, 5),
+                          blue: element.slice(5, 7),
+                      }))
+                    }
+                  }> Set Color on Box</button>
                   </div>
                 );
               })
