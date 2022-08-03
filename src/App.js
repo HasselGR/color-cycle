@@ -100,7 +100,7 @@ function App() {
       <div className="title-container">
         <div className='header-container'>
           <h1>color-cycle</h1>
-          <h2>This app draws a box filled with a user specified color and makes small changes over time also based on user input. In other words, from cycles through changes to the originally specified color. These changes allow the user to experience the visual impact different changes to the individual parts of an RGB color specification (e.g. #000000 color code).</h2>
+          <label>This app draws a box filled with a user specified color and makes small changes over time also based on user input. In other words, from cycles through changes to the originally specified color. These changes allow the user to experience the visual impact different changes to the individual parts of an RGB color specification (e.g. #000000 color code).</label>
         </div>
         <div className='box-container'>
         <div style={{backgroundColor: color}} className='color-box'/>
@@ -108,24 +108,31 @@ function App() {
         </div>
       </div>
       <div className='inputs-and-palette-container'>
+        
         <form className="inputs-container">
+          <h1>Pattern Change:</h1>
+          <div className='break'/>
+          <div className='pattern-text'>
+            <input
+              type="radio"
+              name="pattern"
+              value="increment"
+              id="increment"
+              checked={pattern === 'increment'}
+              onChange={patternChange}
+            />
+            <label>Increment</label>
+          </div>
+          <div>
           <input
-            type="radio"
-            name="pattern"
-            value="increment"
-            id="increment"
-            checked={pattern === 'increment'}
-            onChange={patternChange}
-          />
-          <label>Increment</label>
-          <input
-            type="radio"
-            name="pattern"
-            value="decrement"
-            id="decrement"
-            onChange={patternChange}
-          />
-          <label>Decrement</label>
+              type="radio"
+              name="pattern"
+              value="decrement"
+              id="decrement"
+              onChange={patternChange}
+            />
+            <label className='pattern-text'>Decrement</label>
+          </div>
           <div className='break'/>
             <h1>Input for colors:</h1>  
           <div className='break'/>
@@ -150,7 +157,7 @@ function App() {
           <div className='palette-elements-container'>
             { palette.length === 0 ?
             
-            <h2>Your palette will be shown here when you add an element</h2>
+            <label>Your palette will be shown here when you add an element</label>
               :
               palette.map((element, index) => {
                 return (
@@ -158,10 +165,12 @@ function App() {
                   onClick={() =>{
                     navigator.clipboard.writeText(`${element};`);
                   }}>
-                    <div 
-                      style={{backgroundColor: element, width: '45px', height:'45px', marginTop:'15px'}}
-                      />
-                    <h2>{element}</h2>
+                    <div className='element-label'>
+                      <div 
+                        style={{backgroundColor: element, width: '45px', height:'45px'}}
+                        />
+                      <label className='color-label' >{element}</label>
+                    </div>
                   <button className='button-56' onClick={
                     () => {
                       setColor(element)
@@ -173,6 +182,11 @@ function App() {
                       }))
                     }
                   }> Set Color on Box</button>
+                  <button className='button-56' onClick={
+                    () => {
+                      setPalette(current => current.filter(colorCode => colorCode !== element))
+                    }
+                    }>Delete Color</button>
                   </div>
                 );
               })

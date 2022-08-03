@@ -33,11 +33,29 @@
 }
 
 
+
 .inputs-and-palette-container{
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+}
+.pattern-text{
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.element-label{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  
+}
+.color-label{
+  align-self: center;
+  font-size: large;
+  font-weight: bold;
 }
 
 .inputs-container{
