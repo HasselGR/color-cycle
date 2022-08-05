@@ -20,7 +20,7 @@ function App() {
   const [pattern, setPattern] = useState('increment');
 
   useEffect(() => {
-    setColor(`#${colors.red}${colors.green}${colors.blue}`)
+    setColor(`#${colors.red.length === 1 ? '0' + colors.red : colors.red }${colors.green.length === 1 ? '0' + colors.green : colors.green}${colors.blue.length === 1 ? '0' + colors.blue : colors.blue}`)
   }, [colors]) 
   
   
@@ -51,6 +51,21 @@ function App() {
     setPattern(event.target.value);
   }
 
+  const checkLength = (component) =>{
+    if(colors[component].length < 2){
+      console.log('condition met, its length is ', colors[component].length )
+      setColors(oldColors => ({
+        ...oldColors,
+        [component]:`0${oldColors[component]}` ,
+      }))
+    }
+    // else if(colors[component].length !== 2){
+    //   setColors(oldColors => ({
+    //     ...oldColors,
+    //     [component]:oldColors[component].slice(1,3) ,
+    //   }))
+    // }
+  }
 
   const handleStart = (event) =>{
     event.preventDefault()
@@ -60,14 +75,14 @@ function App() {
       console.log('the colors ended like this:', colors)
       return;
     }
-
     const newInterval = setInterval(() => {
+
       if(pattern === 'increment'){
         setColors(oldColors => ({
           ...oldColors,
-            red: (parseInt(oldColors.red, 16) + parseInt(oldColors.incrementRed, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.red, 16) + parseInt(oldColors.incrementRed, 16)).toString(16),
-            blue: (parseInt(oldColors.blue, 16) + parseInt(oldColors.incrementBlue, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.blue, 16) + parseInt(oldColors.incrementBlue, 16)).toString(16),
-            green: (parseInt(oldColors.green, 16) + parseInt(oldColors.incrementGreen, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.green, 16) + parseInt(oldColors.incrementGreen, 16)).toString(16),
+          red: (parseInt(oldColors.red, 16) + parseInt(oldColors.incrementRed, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.red, 16) + parseInt(oldColors.incrementRed, 16)).toString(16),
+          blue: (parseInt(oldColors.blue, 16) + parseInt(oldColors.incrementBlue, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.blue, 16) + parseInt(oldColors.incrementBlue, 16)).toString(16),
+          green: (parseInt(oldColors.green, 16) + parseInt(oldColors.incrementGreen, 16)) > parseInt('ff', 16)? 'ff': (parseInt(oldColors.green, 16) + parseInt(oldColors.incrementGreen, 16)).toString(16),
         }))
       }
       if(pattern === 'decrement'){
@@ -78,9 +93,11 @@ function App() {
             green: (parseInt(oldColors.green, 16) - parseInt(oldColors.incrementGreen, 16)) < parseInt('00', 16)? '00': (parseInt(oldColors.green, 16) - parseInt(oldColors.incrementGreen, 16)).toString(16),
         }))
       }
-        
+      // checkLength('red');
+      // checkLength('green');
+      // checkLength('blue');
       }, time=== '' ? '250': time)
-    setIntervalID(newInterval);
+      setIntervalID(newInterval);
   }
   
   const addToPalette = (event) => {
