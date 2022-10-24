@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# [Color-Cycle](https://storied-sfogliatella-ff01eb.netlify.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An App designed to cycle and save colors given an initial hexadecimal color and an increase/decrease in each component
 
-## Available Scripts
+## What does it do?
 
-In the project directory, you can run:
+The app is composed of 7 entries:
 
-### `npm start`
+Both the color and the change values are separated in components of three. Red, Green and Blue respectively. You first need to enter a value for each component (from 0 to FF), the first three create the color, which will be displayed on the box located in the upper right corner. and the last three will dictate how much each component will increase.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Finally, the last entry dictates the frequency a which the value will increase or decrease, in milliseconds.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Once you start the process here is what you can do:
 
-### `npm test`
+### `Add Current Color to Palette`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Beneath the colored square you will see this button, this will add the color shown currently there to the "Color Palette" box.
 
-### `npm run build`
+####  `-Set Color On Box`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once you add a color, you will have the option to put that color back into the square, if you want to give it a closer look.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+####  `-Delete Color`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+As its name says, this will delete this color from the color palette. useful for when you want to compare colors, or discard those you don't like.
 
-### `npm run eject`
+####  `-Copy Color`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+You can click in the color or the text of one of the added colors to copy it to your clipboard, that way you skip the hassle of highlighting it!
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can only change the entries directly when the process is stopped, but you are able to copy the colors to the clipboard without stopping the process if you wish to do so.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This app was an idea given by [florinpop17's App Ideas Repository](https://github.com/florinpop17/app-ideas) 
