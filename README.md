@@ -1,4 +1,5 @@
 # [Color-Cycle](https://storied-sfogliatella-ff01eb.netlify.app/)
+(Click to open site)
 
 An App designed to cycle and save colors given an initial hexadecimal color and an increase/decrease in each component
 
@@ -29,6 +30,17 @@ As its name says, this will delete this color from the color palette. useful for
 You can click in the color or the text of one of the added colors to copy it to your clipboard, that way you skip the hassle of highlighting it!
 
 You can only change the entries directly when the process is stopped, but you are able to copy the colors to the clipboard without stopping the process if you wish to do so.
+
+---
+
+
+---
+
+## Tech stack
+- HTML5
+- CSS3
+- JavaScript (vanilla ES6+)
+- Sin backend (static site)
 
 ---
 
